@@ -3,12 +3,13 @@ var scl = 20;
 var isDead = false;
 var scr=  'score';
 var food;
+let preventMultupleKeys = 10;
+
 function setup() {
   createCanvas(600, 600);
   s = new Snake();
-  frameRate(16);
+  frameRate(17);
   pickLocation();
-
 }
 
 
@@ -18,14 +19,16 @@ function pickLocation(){
   var cols = floor(width/scl);
   var rows = floor(height/scl);
   food = createVector(floor(random(cols)), floor(random(rows)));
- food.mult(scl);                      
+ food.mult(scl);       
+                
 }
 
 
 
-
+let asd = false;
 
 function draw() {
+  timer();
   background(40, 40, 40);
   textFont('cursive');
   textSize(16);
@@ -38,12 +41,11 @@ function draw() {
   fill(255,0,0);
   rect(food.x,food.y,scl,scl);
   
-  console.log(isDead);
   if(isDead){
      textSize(16);
   fill(255);
   text('Game Over',260,270); 
-  text('Press space to restart',220,300);
+    text('Press space to restart', 220, 300);
     
   }
   
@@ -52,43 +54,33 @@ function draw() {
     
   }
 }
-  var isUp = false;
-  var isDown =false;
-  var isRight = false;
-  var isLeft = false;
+  function timer() {
+  if(asd) preventMultupleKeys++;
 
-function keyPressed(){
+  }
+
+
+function keyPressed() {
+  asd = true;
+  if (preventMultupleKeys < 1) return;
+  else {
+    preventMultupleKeys = 0;
+  }
+
+  if (s.xspeed === 1 && s.yspeed == 0 && keyCode == LEFT_ARROW) return;
+  else if (s.xspeed === -1  && s.yspeed == 0 && keyCode == RIGHT_ARROW) return;
+  else if (s.xspeed === 0  && s.yspeed == 1 && keyCode == UP_ARROW) return;
+  else if (s.xspeed === 0  && s.yspeed == -1 && keyCode == DOWN_ARROW) return;
+
   
-
-  if(keyCode === UP_ARROW){
-    if(isDown) return
+  if (keyCode === UP_ARROW  ) {
     s.dir(0,-1);
-    isUp = true;
-    isDown = false;
-    isRight = false;
-    isLeft = false;
-  }else if(keyCode === DOWN_ARROW){
-    if(isUp) return
+  } else if (keyCode === DOWN_ARROW  ) {
     s.dir(0,1);
-    isUp = false;
-    isDown = true;
-    isRight = false;
-    isLeft = false;
-  }else if(keyCode === RIGHT_ARROW){
-    if(isLeft) return
-    s.dir(1,0);
-    isUp = false;
-    isDown = false;
-    isRight = true;
-    isLeft = false;
-    
-  }else if(keyCode === LEFT_ARROW){
-    if(isRight)return
+  } else if (keyCode === RIGHT_ARROW  ) {
+    s.dir(1,0);    
+  } else if (keyCode === LEFT_ARROW  ) {
     s.dir(-1,0);
-    isUp = false;
-    isDown = false;
-    isRight = false;
-    isLeft = true;
   }
   
 }

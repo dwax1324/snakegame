@@ -1,8 +1,8 @@
-var score =0;
+var score = 0;
 var Snake = function Snake(){
   this.x = 0;
   this.y = 0;
-  this.xspeed = 1;
+  this.xspeed = 0;
   this.yspeed = 0;
   this.total = 0;
   this.tail = [];
@@ -13,7 +13,6 @@ var Snake = function Snake(){
     var d = dist(this.x, this.y , pos.x , pos.y);
     if( d<1){
       this.total++;
-      console.log(this.total);
       score = this.total;
        return true; 
       
