@@ -1,0 +1,20 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color:rgb(51,51,51);
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  flex-direction: column;
+}
+
+#title{
+  position: absolute;
+  top: 10%;
+  font-family: cursive;
+  color: pink;
+}
+canvas {
+  display: block;
+  margin-top:50%;
+}
