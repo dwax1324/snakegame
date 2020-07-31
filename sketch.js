@@ -26,7 +26,8 @@ function pickLocation(){
 
 
 function draw() {
-  background(40);
+  background(40, 40, 40);
+  textFont('cursive');
   textSize(16);
   fill(255);
   text('score',550,20);
